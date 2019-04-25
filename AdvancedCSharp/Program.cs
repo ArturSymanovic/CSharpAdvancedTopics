@@ -10,28 +10,21 @@ namespace AdvancedCSharp
     {
         static void Main(string[] args)
         {
-            //var book = new Book { Isbn = "1111"};
+            var processor = new PhotoProcessor();
 
-            //var numbers = new List();
-            //numbers.Add(10);
+            var filters = new PhotoFilters();
 
-            //var books = new BookList();
-            //books.Add(book);
+            Action<Photo> filterHandler = filters.ApplyBrightness;
+            filterHandler += filters.ApplyContrast;
+            filterHandler += filters.Resize;
+            filterHandler += RemoveRedEyeFilter;
 
-            //var numbers = new GenericList<int>();
-            //numbers.Add(10);
+            processor.Process("photo.jpg", filterHandler);
+        }
 
-            //var books = new GenericList<Book>();
-            //books.Add(book);
-
-            //var dictionary = new GenericDictionary<string, Book>();
-            //dictionary.Add("1234", book);
-
-            Utilities<int> test = new Utilities<int>();
-
-            var number = new Nullable<int>();
-            Console.WriteLine("Has Value ? " + number.HasValue);
-            Console.WriteLine("Value: " + number.GetValueOrDefault());
+        static void RemoveRedEyeFilter(Photo photo)
+        {
+            Console.WriteLine("Apply remove red eye filter");
         }
     }
 }

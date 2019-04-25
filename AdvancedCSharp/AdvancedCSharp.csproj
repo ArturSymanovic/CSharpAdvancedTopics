@@ -50,6 +50,9 @@
     <Compile Include="GenericList.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Nullable.cs" />
+    <Compile Include="Photo.cs" />
+    <Compile Include="PhotoFilters.cs" />
+    <Compile Include="PhotoProcessor.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
