@@ -10,21 +10,52 @@ namespace AdvancedCSharp
     {
         static void Main(string[] args)
         {
-            var processor = new PhotoProcessor();
+            //Console.WriteLine(Square(5));
 
-            var filters = new PhotoFilters();
+            //----------------------------------------------------
 
-            Action<Photo> filterHandler = filters.ApplyBrightness;
-            filterHandler += filters.ApplyContrast;
-            filterHandler += filters.Resize;
-            filterHandler += RemoveRedEyeFilter;
+            // args => expression       : when there are arguments
+            // () => expression         : when no arguments
+            // x => expression          : when 1 argument
+            // (x, y, z) => expression  : when several arguments
 
-            processor.Process("photo.jpg", filterHandler);
+
+            //----------------------------------------------------
+
+            //Func<int, int> square = number => number * number;
+            //Console.WriteLine(square(5));
+
+
+            //----------------------------------------------------
+
+            //const int factor = 5;
+
+            //Func<int, int> multipler = n => n * factor;
+
+            //var result = multipler(10);
+
+            //Console.WriteLine(result);
+
+            //----------------------------------------------------
+
+            var books = new BookRepository().GetBooks();
+
+            //var cheapBooks = books.FindAll(IsCheaperThan10Dollars);
+            var cheapBooks = books.FindAll(book =>book.Price < 10);
+            foreach (var item in cheapBooks)
+            {
+                Console.WriteLine(item.Title);
+            }
         }
 
-        static void RemoveRedEyeFilter(Photo photo)
+        static bool IsCheaperThan10Dollars(Book book)
         {
-            Console.WriteLine("Apply remove red eye filter");
+            return book.Price < 10;
         }
+
+        //static int Square(int number)
+        //{
+        //    return number * number;
+        //}
     }
 }
