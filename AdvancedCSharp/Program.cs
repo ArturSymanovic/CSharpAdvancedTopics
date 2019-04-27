@@ -10,86 +10,39 @@ namespace AdvancedCSharp
     {
         static void Main(string[] args)
         {
-            //Example1();
+            //DateTime? date1 = null;
+            //Nullable<DateTime> date = null;
 
+            //Console.WriteLine("GetValueOrDefault() : " + date.GetValueOrDefault());
+            //Console.WriteLine("HasValue : " + date.HasValue);
+            ////Error when null
+            //Console.WriteLine("Value" + date.Value);            
 
-            var books = new BookRepository().GetBooks();
-            //Return MVC book
+            DateTime? date = new DateTime(2014, 1, 1);
 
-            //breaks if does not exist
-            var book = books.Single(b => b.Title == "ASP.NET MVC");
-            Console.WriteLine(book.Title);
-            
-            //retuns default value if does not exist 
-            book = books.SingleOrDefault(b => b.Title == "ASP.NET MVC++");
-            Console.WriteLine(book==null);
+            //Error
+            //DateTime date2 = date;
+            DateTime date2 = date.GetValueOrDefault();
 
-            //breaks if does not exist
-            book = books.First(b => b.Title == "C# Advanced Topics");
-            Console.WriteLine(book.Title + " " + book.Price);
+            DateTime? date3 = date2;
+            Console.WriteLine(date3.GetValueOrDefault());
 
-            //retuns default value if does not exist 
-            book = books.FirstOrDefault(b => b.Title == "C# Advanced Topics111");
-            Console.WriteLine(book == null);
+            //-----------------------------------------------------
 
-            //breaks if does not exist
-            book = books.Last(b => b.Title == "C# Advanced Topics");
-            Console.WriteLine(book.Title + " " + book.Price);
+            DateTime? dat = null;
+            DateTime dat2;
 
-            //retuns default value if does not exist 
-            book = books.LastOrDefault(b => b.Title == "C# Advanced Topics111");
-            Console.WriteLine(book == null);
+            if (dat != null)
+                dat2 = date.GetValueOrDefault();
+            else
+                dat2 = DateTime.Today;
 
-            
-            var subBooks = books.Skip(5).Take(3);
-            foreach (var abook in subBooks)
-            {
-                Console.WriteLine(abook.Title);
-            }
+            //Null coalescing operator(same as above code)
+            dat2 = dat ?? DateTime.Today;
+            dat2 = (dat != null) ? dat.GetValueOrDefault() : DateTime.Today;
 
-            var count = books.Count();
-            Console.WriteLine(count);
+            Console.WriteLine(dat2);
 
-            var max = books.Max(b => b.Price);
-            Console.WriteLine(max);
-
-            var min = books.Min(b => b.Price);
-            Console.WriteLine(min);
-
-            var total = books.Sum(b => b.Price);
-            Console.WriteLine(total);
-        }
-
-        private static void Example1()
-        {
-            var books = new BookRepository().GetBooks();
-
-            //Without LINQ
-            //var cheapBooks = new List<Book>();
-            //foreach (var book in books)
-            //{
-            //    if (book.Price < 10)
-            //        cheapBooks.Add(book);
-            //}
-
-            //LINQ Query Operators
-            var cheaperBooks = from b in books
-                               where b.Price < 10f
-                               orderby b.Title
-                               select b.Title;
-
-
-
-            //LINQ Extension Methods
-            var cheapBooks = books
-                                .Where(b => b.Price < 10f)
-                                .OrderBy(b => b.Title)
-                                .Select(b => b.Title);
-            foreach (var book in cheapBooks)
-            {
-                Console.WriteLine(book);
-                //Console.WriteLine(book.Title + " " + book.Price);
-            }
         }
     }
 }

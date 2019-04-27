@@ -52,7 +52,6 @@
     <Compile Include="List.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="MessageService.cs" />
-    <Compile Include="Nullable.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PhotoFilters.cs" />
     <Compile Include="PhotoProcessor.cs" />
