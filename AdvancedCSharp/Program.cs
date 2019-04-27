@@ -10,38 +10,31 @@ namespace AdvancedCSharp
     {
         static void Main(string[] args)
         {
-            //DateTime? date1 = null;
-            //Nullable<DateTime> date = null;
+            object obj = "Artur";
 
-            //Console.WriteLine("GetValueOrDefault() : " + date.GetValueOrDefault());
-            //Console.WriteLine("HasValue : " + date.HasValue);
-            ////Error when null
-            //Console.WriteLine("Value" + date.Value);            
+            obj.GetHashCode();
+            //obj.GetHashCode(); With Reflection 
+            var methodInfo = obj.GetType().GetMethod("GetHashCode");
+            methodInfo.Invoke(obj, null);
 
-            DateTime? date = new DateTime(2014, 1, 1);
+            //Not compiling
+            //object excelObject = "Artur";
+            //excelObject.Optimize();
+            //compiling (exception because in reality there are no Optimize method)
+            dynamic excelObject = "Artur";
+            excelObject.Optimize();
 
-            //Error
-            //DateTime date2 = date;
-            DateTime date2 = date.GetValueOrDefault();
+            //Woud run without exceptions
+            dynamic name = "Artur";
+            name = 10;
 
-            DateTime? date3 = date2;
-            Console.WriteLine(date3.GetValueOrDefault());
+            dynamic a = 10;
+            dynamic b = 5;
+            var c = a + b;
 
-            //-----------------------------------------------------
 
-            DateTime? dat = null;
-            DateTime dat2;
-
-            if (dat != null)
-                dat2 = date.GetValueOrDefault();
-            else
-                dat2 = DateTime.Today;
-
-            //Null coalescing operator(same as above code)
-            dat2 = dat ?? DateTime.Today;
-            dat2 = (dat != null) ? dat.GetValueOrDefault() : DateTime.Today;
-
-            Console.WriteLine(dat2);
+            int i = 5;
+            dynamic d = i;
 
         }
     }
