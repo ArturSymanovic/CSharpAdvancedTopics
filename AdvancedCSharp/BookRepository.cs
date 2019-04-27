@@ -8,13 +8,15 @@ namespace AdvancedCSharp
 {
     class BookRepository
     {
-        public List<Book> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
             return new List<Book>
             {
-                new Book() {Title="Title 1", Price = 5},
-                new Book() {Title="Title 2", Price = 7},
-                new Book() {Title="Title 3", Price = 17}
+                new Book() {Title="ADO.Net Step by Step", Price = 5f},
+                new Book() {Title="ASP.NET MVC", Price = 9.99f},
+                new Book() {Title="ASP.NET Web API", Price = 12f},
+                new Book() {Title="C# Advanced Topics", Price = 7f},
+                new Book() {Title="C# Advanced Topics", Price = 9f}
             };
         }
     }
