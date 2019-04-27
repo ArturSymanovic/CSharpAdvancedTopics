@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,32 +11,56 @@ namespace AdvancedCSharp
     {
         static void Main(string[] args)
         {
-            object obj = "Artur";
+            StreamReader streamReader = null;
+            try
+            {
+                streamReader = new StreamReader(@"c:\fiel.zip");
+                var calculator = new Calculator();
+                var result = calculator.Divide(5, 0);
 
-            obj.GetHashCode();
-            //obj.GetHashCode(); With Reflection 
-            var methodInfo = obj.GetType().GetMethod("GetHashCode");
-            methodInfo.Invoke(obj, null);
+                var content = streamReader.ReadToEnd();
+            }
+            catch(DivideByZeroException ex)
+            {
+                Console.WriteLine("You cannot divide by zero");
+            }
+            catch (ArithmeticException ex)
+            {
 
-            //Not compiling
-            //object excelObject = "Artur";
-            //excelObject.Optimize();
-            //compiling (exception because in reality there are no Optimize method)
-            dynamic excelObject = "Artur";
-            excelObject.Optimize();
-
-            //Woud run without exceptions
-            dynamic name = "Artur";
-            name = 10;
-
-            dynamic a = 10;
-            dynamic b = 5;
-            var c = a + b;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Sorry, an unexpected error occured");
+            }
+            finally
+            {
+                if (streamReader != null)
+                    streamReader.Dispose();
+            }
 
 
-            int i = 5;
-            dynamic d = i;
+            try
+            {
+                using (var streamReader1 = new StreamReader(@"c:\file.zip"))
+                {
+                    var content = streamReader1.ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Sorry, an unexpected error occured");
+            }
 
+
+            try
+            {
+                var api = new YouTubeApi();
+                var videos = api.GetVideos("artur");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
